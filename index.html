@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria Insurance Agency — Protection With a Personal Touch</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0a1628;
+  --navy-light: #132038;
+  --navy-mid: #1a2d4a;
+  --gold: #c9a96e;
+  --gold-light: #dfc28a;
+  --gold-pale: #f5e6c8;
+  --cream: #faf7f2;
+  --cream-dark: #f0ebe2;
+  --white: #ffffff;
+  --text-dark: #1a1a2e;
+  --text-body: #4a4a5a;
+  --text-light: #8a8a9a;
+  --text-on-dark: #c8c8d8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-body);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════ GRAIN OVERLAY ═══════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════ NAV ═══════════════════ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.scrolled {
+  background: rgba(10, 22, 40, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 0.75rem 3rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.nav-logo span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-cta {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold) !important;
+  padding: 0.6rem 1.5rem;
+  border-radius: 2px;
+  transition: all 0.3s !important;
+  cursor: pointer;
+}
+
+.nav-cta:hover {
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 3rem 6rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 40px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--text-on-dark);
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '→';
+  transition: transform 0.3s;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,169,110,0.3);
+}
+
+.btn-primary:hover::after { transform: translateX(4px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1s 0.6s forwards;
+}
+
+.hero-card {
+  background: var(--navy-light);
+  border: 1px solid rgba(201,169,110,0.15);
+  border-radius: 4px;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 2rem;
+  right: 2rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s;
+}
+
+.stat:hover {
+  background: rgba(201,169,110,0.05);
+  border-color: rgba(201,169,110,0.15);
+}
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-on-dark);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hero-trust {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trust-stars { color: var(--gold); font-size: 1.1rem; letter-spacing: 2px; }
+
+.trust-text {
+  font-size: 0.85rem;
+  color: var(--text-on-dark);
+  line-height: 1.5;
+}
+
+.trust-text strong { color: var(--white); }
+
+/* ═══════════════════ SERVICES ═══════════════════ */
+.services {
+  padding: 8rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  padding: 2.5rem;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 3px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(10,22,40,0.08);
+  border-color: transparent;
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s;
+}
+
+.service-card:hover .service-icon {
+  background: var(--navy);
+}
+
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.service-card p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: gap 0.3s;
+}
+
+.service-link:hover { gap: 0.75rem; }
+
+/* Wide card spanning 3 cols */
+.service-card.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+  background: var(--navy);
+}
+
+.service-card.wide h3 { color: var(--white); margin: 0; }
+.service-card.wide p { color: var(--text-on-dark); margin: 0; }
+.service-card.wide .service-icon { background: rgba(201,169,110,0.1); margin: 0; }
+
+.wide-cta {
+  padding: 0.75rem 1.75rem;
+  background: var(--gold);
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.wide-cta:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════ ABOUT ═══════════════════ */
+.about {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.about-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 3rem;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-frame {
+  aspect-ratio: 3/4;
+  background: var(--navy-mid);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 3px;
+}
+
+.about-initials {
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  font-weight: 300;
+  color: rgba(201,169,110,0.08);
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+
+.about-accent {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--gold);
+  border-radius: 3px;
+  opacity: 0.3;
+}
+
+.about-content .section-eyebrow { text-align: left; }
+.about-content .section-title { text-align: left; color: var(--white); }
+
+.about-text {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-on-dark);
+  font-weight: 300;
+}
+
+.about-text + .about-text { margin-top: 1rem; }
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.value {
+  padding: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 3px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.value:hover {
+  border-color: rgba(201,169,110,0.2);
+  background: rgba(201,169,110,0.03);
+}
+
+.value-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+
+.value-label {
+  font-size: 0.75rem;
+  color: var(--text-on-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+/* ═══════════════════ TESTIMONIALS ═══════════════════ */
+.testimonials {
+  padding: 8rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.testimonial {
+  padding: 2.5rem;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.testimonial:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(10,22,40,0.06);
+}
+
+.testimonial-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: -1rem;
+}
+
+.testimonial p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.testimonial-author {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.author-role {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.15rem;
+}
+
+/* ═══════════════════ CONTACT ═══════════════════ */
+.contact {
+  background: var(--cream-dark);
+  position: relative;
+}
+
+.contact-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+
+.contact-info .section-eyebrow { text-align: left; }
+.contact-info .section-title { text-align: left; }
+
+.contact-desc {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  font-weight: 300;
+  max-width: 440px;
+}
+
+.contact-details {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-item-text {
+  font-size: 0.92rem;
+  color: var(--text-body);
+}
+
+.contact-item-text strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.15rem;
+}
+
+.contact-form {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 40px rgba(10,22,40,0.04);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--cream);
+  border: 1.5px solid transparent;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  transition: all 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.1);
+}
+
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a9a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s;
+  margin-top: 0.5rem;
+}
+
+.form-submit:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(10,22,40,0.15);
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer {
+  background: var(--navy);
+  color: var(--text-on-dark);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.2;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 3rem 3rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-brand .nav-logo {
+  font-size: 1.6rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-on-dark);
+  font-weight: 300;
+  max-width: 300px;
+}
+
+.footer-col h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+}
+
+.footer-col ul { list-style: none; }
+
+.footer-col li { margin-bottom: 0.6rem; }
+
+.footer-col a {
+  color: var(--text-on-dark);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 300;
+  transition: color 0.3s;
+}
+
+.footer-col a:hover { color: var(--gold); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.footer-bottom a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-bottom a:hover { color: var(--gold); }
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* ═══════════════════ ANIMATIONS ═══════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .about-inner { grid-template-columns: 1fr; }
+  .about-visual { display: none; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-inner { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero-inner { padding: 7rem 1.5rem 4rem; }
+  .services { padding: 5rem 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card.wide { grid-template-columns: 1fr; text-align: center; }
+  .testimonials { padding: 5rem 1.5rem; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact-inner { padding: 5rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { padding: 3rem 1.5rem 2rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  .about-values { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Victoria <span>Insurance</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Licensed &amp; Trusted Since 2012</div>
+      <h1>Protection crafted<br>with a <em>personal touch</em></h1>
+      <p class="hero-desc">Victoria Insurance Agency delivers thoughtful coverage for families and businesses who value relationships over transactions. Because your peace of mind deserves more than a policy number.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Free Quote</a>
+        <a href="#services" class="btn-outline">Explore Coverage</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">2,400+</div>
+            <div class="stat-label">Families Protected</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Retention Rate</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">13</div>
+            <div class="stat-label">Years of Service</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label">Client Rating</div>
+          </div>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-stars">★★★★★</div>
+          <div class="trust-text"><strong>"Victoria saved us thousands</strong> while actually improving our coverage. We'll never go anywhere else."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">What We Cover</div>
+    <h2 class="section-title">Comprehensive protection,<br>personally delivered</h2>
+    <p class="section-subtitle">Every policy is reviewed by Victoria herself to ensure you're never over-insured or under-protected.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🚗</div>
+      <h3>Auto Insurance</h3>
+      <p>From liability to full coverage, we tailor your auto policy to your driving habits, vehicle, and budget — not a one-size-fits-all formula.</p>
+      <a href="#contact" class="service-link">Get a Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏠</div>
+      <h3>Home Insurance</h3>
+      <p>Your home is more than a structure. We protect what's inside it — your memories, your comfort, your future — with coverage that truly fits.</p>
+      <a href="#contact" class="service-link">Get a Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">❤️</div>
+      <h3>Life Insurance</h3>
+      <p>Term or whole life, we help you build a safety net that ensures your loved ones are cared for no matter what tomorrow brings.</p>
+      <a href="#contact" class="service-link">Get a Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏢</div>
+      <h3>Business Insurance</h3>
+      <p>General liability, workers' comp, commercial property — we protect your business so you can focus on building it.</p>
+      <a href="#contact" class="service-link">Get a Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">☂️</div>
+      <h3>Umbrella Policies</h3>
+      <p>Extra liability protection that kicks in when your other policies reach their limits. The safety net for your safety net.</p>
+      <a href="#contact" class="service-link">Get a Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📋</div>
+      <h3>Policy Reviews</h3>
+      <p>Already insured? Bring us your current policies. We'll find gaps, eliminate overlap, and often save you money in the process.</p>
+      <a href="#contact" class="service-link">Book a Review →</a>
+    </div>
+    <div class="service-card wide reveal">
+      <div class="service-icon">💬</div>
+      <div>
+        <h3>Not sure what you need?</h3>
+        <p>Book a free 15-minute consultation and Victoria will personally walk you through your options.</p>
+      </div>
+      <a href="#contact" class="wide-cta">Book a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-initials">V</div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-content">
+      <div class="section-eyebrow reveal">Meet Victoria</div>
+      <h2 class="section-title reveal">Insurance is personal.<br>So is how I do business.</h2>
+      <p class="about-text reveal">After spending years watching big agencies treat clients like policy numbers, I started Victoria Insurance Agency with one belief: <strong style="color:var(--gold)">people deserve an advisor who actually knows their name.</strong></p>
+      <p class="about-text reveal">Every client gets my direct line. Every policy gets my personal review. Every claim gets my advocacy. That's not a tagline — it's how I've built a 98% retention rate over 13 years.</p>
+      <div class="about-values reveal">
+        <div class="value">
+          <div class="value-num">24hr</div>
+          <div class="value-label">Response Time</div>
+        </div>
+        <div class="value">
+          <div class="value-num">15+</div>
+          <div class="value-label">Carrier Partners</div>
+        </div>
+        <div class="value">
+          <div class="value-num">$2.1M</div>
+          <div class="value-label">Saved for Clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Client Stories</div>
+    <h2 class="section-title">Trusted by families &amp;<br>businesses alike</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="testimonial-quote">"</div>
+      <p>Victoria found us better coverage at $200/month less than what we were paying. She took the time to understand our family's actual needs instead of just running numbers.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Marcus & Rachel Thompson</div>
+          <div class="author-role">Home & Auto Client — 6 years</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-quote">"</div>
+      <p>When a pipe burst in our office, Victoria was on the phone with the adjuster before we even finished filing. She treated our claim like it was her own business on the line.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">DS</div>
+        <div>
+          <div class="author-name">David Sullivan</div>
+          <div class="author-role">Business Insurance Client — 4 years</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-quote">"</div>
+      <p>I've never had an insurance agent call me to proactively check if my coverage still made sense. Victoria does that every year. It's a level of care you just don't see anymore.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">LN</div>
+        <div>
+          <div class="author-name">Linda Nguyen</div>
+          <div class="author-role">Life & Umbrella Client — 8 years</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-eyebrow reveal">Get In Touch</div>
+      <h2 class="section-title reveal">Let's find the right<br>coverage for you</h2>
+      <p class="contact-desc reveal">Whether you're shopping for the first time or reviewing existing policies, a conversation with Victoria costs nothing and could save you thousands.</p>
+      <div class="contact-details reveal">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            (555) 912-4800
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            victoria@victoriainsures.com
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Office</strong>
+            123 Main Street, Suite 200
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Hours</strong>
+            Mon–Fri 9am–6pm &nbsp;|&nbsp; Sat by appointment
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="jane@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(555) 000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>I'm interested in</label>
+        <select required>
+          <option value="" disabled selected>Select coverage type</option>
+          <option>Auto Insurance</option>
+          <option>Home Insurance</option>
+          <option>Life Insurance</option>
+          <option>Business Insurance</option>
+          <option>Umbrella Policy</option>
+          <option>Policy Review</option>
+          <option>Not sure — need guidance</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell me a bit about your situation</label>
+        <textarea placeholder="E.g., I just bought a home and need to bundle with auto, currently paying $X/month..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send My Request</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Victoria <span>Insurance</span></a>
+        <p>Independent insurance agency providing personalized coverage for families and businesses. Licensed in all 50 states.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="#services">Auto Insurance</a></li>
+          <li><a href="#services">Home Insurance</a></li>
+          <li><a href="#services">Life Insurance</a></li>
+          <li><a href="#services">Business Insurance</a></li>
+          <li><a href="#services">Umbrella Policies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Victoria</a></li>
+          <li><a href="#testimonials">Client Stories</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">File a Claim</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Insurance 101</a></li>
+          <li><a href="#">Coverage Calculator</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Victoria Insurance Agency, LLC. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Disclosures</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Form handler
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.style.background = 'var(--gold)';
+  btn.style.color = 'var(--navy)';
+  setTimeout(() => {
+    btn.textContent = '✓ Request Sent — Victoria will be in touch!';
+    btn.style.background = '#1a6b3c';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send My Request';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }, 1500);
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
