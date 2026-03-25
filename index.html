@@ -1349,6 +1349,7 @@ footer::before {
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
         <a href="#">Disclosures</a>
+        <button id="lang-toggle" style="background:none;border:1px solid var(--text-light);color:var(--text-light);padding:0.35rem 0.85rem;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.78rem;cursor:pointer;letter-spacing:0.05em;transition:all 0.3s;">ES | Español</button>
       </div>
     </div>
   </div>
@@ -1401,6 +1402,213 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+});
+
+// Language toggle
+const translations = {
+  en: {
+    'hero-eyebrow': 'Your Personal Insurance Agent',
+    'hero-h1': 'Hi, I\'m Victoria.<br>I\'ll find you the <em>best coverage</em>',
+    'hero-desc': 'I work with every major insurance carrier (except State Farm) to shop the best rates for you. One call to me replaces dozens of calls to different companies. Hablamos Español.',
+    'btn-quote': 'Request a Free Quote',
+    'btn-explore': 'Explore Coverage',
+    'svc-eyebrow': 'What I Cover',
+    'svc-title': 'Comprehensive protection,<br>personally delivered',
+    'svc-subtitle': 'I shop every major carrier (except State Farm) to find you the best rate. One agent, dozens of options.',
+    'svc-auto-h': 'Auto Insurance',
+    'svc-auto-p': 'Personal auto coverage tailored to your driving habits, vehicle, and budget. I shop multiple carriers to find your best rate. Bad driving record? I can still get you covered — responses within 48 hours.',
+    'svc-home-h': 'Home Insurance',
+    'svc-home-p': 'Protect your biggest investment with comprehensive homeowners coverage. We make sure your home and everything in it is covered.',
+    'svc-rent-h': 'Renters Insurance',
+    'svc-rent-p': 'Affordable protection for your belongings, liability, and living expenses if the unexpected happens. Peace of mind for renters.',
+    'svc-biz-h': 'Business Insurance',
+    'svc-biz-p': 'General liability, workers\' compensation (available 9am–4pm), and commercial coverage to protect your business so you can focus on growing it.',
+    'svc-com-h': 'Commercial Auto',
+    'svc-com-p': '24-hour coverage for your business vehicles — from single trucks to full fleets. Available around the clock because your business doesn\'t stop at 5pm.',
+    'svc-umb-h': 'Umbrella Policies',
+    'svc-umb-p': 'Extra liability protection that kicks in when your other policies reach their limits. The safety net for your safety net.',
+    'svc-dmv-h': 'DMV Services',
+    'svc-dmv-p': 'We handle your DMV paperwork and transactions so you don\'t have to. Save time and skip the lines.',
+    'svc-trans-h': 'Translation Services',
+    'svc-trans-p': 'Bilingual support in English and Spanish. We make sure you understand every detail of your coverage. Hablamos Español.',
+    'svc-cta-h': 'Not sure what you need?',
+    'svc-cta-p': 'Call me directly and I\'ll walk you through your options. No obligation, no pressure. English & Spanish.',
+    'about-eyebrow': 'About Me',
+    'about-title': 'Your insurance shouldn\'t<br>be one-size-fits-all.',
+    'about-p1': 'I\'m Victoria Colato — your personal insurance agent at DESM2 Insurance. I have access to every major insurance carrier except State Farm, which means <strong style="color:var(--gold)">I can shop dozens of companies in one call to find you the best rate.</strong>',
+    'about-p2': 'When you call me, you get me — not a call center, not a robot, not a different person every time. I handle everything personally in English or Spanish, from your first quote to filing a claim. Your coverage, your questions, your agent.',
+    'faq-eyebrow': 'Good To Know',
+    'faq-title': 'Common questions,<br>straight answers',
+    'faq-1-h': 'What if I have a bad driving record?',
+    'faq-1-p': 'I work with carriers that specialize in high-risk drivers. It may take up to 48 hours to hear back on these cases, but I\'ll find you coverage — that\'s what I do.',
+    'faq-2-h': 'Can you insure modified or turbocharged vehicles?',
+    'faq-2-p': 'Most insurance companies won\'t cover pre-modified cars with aftermarket turbos, body kits, or performance extensions due to the complexity involved. I\'ll be upfront with you about what\'s possible and help you explore your options.',
+    'faq-3-h': 'What are your hours for workers\' comp vs. auto?',
+    'faq-3-p': 'Workers\' compensation inquiries are handled Monday–Friday, 9am–4pm. Commercial auto coverage support is available 24 hours a day through the carrier\'s claims line — I\'ll make sure you have that number on day one.',
+    'faq-4-h': 'What happens if my claim gets denied or cancelled?',
+    'faq-4-p': 'I don\'t cancel policies or deny claims — that decision comes from the insurance carrier. What I do is advocate for you. If a claim is denied, I\'ll help you understand why and explore what options you have moving forward.',
+    'contact-eyebrow': 'Contact Me Directly',
+    'contact-title': 'Call or text me —<br>I respond personally',
+    'contact-desc': 'Whether you need a new policy, want to compare rates, or just have a question — reach out directly. No call centers, no transfers. Just me.',
+    'form-submit': 'Send My Request',
+    'lang-btn': 'ES | Español',
+  },
+  es: {
+    'hero-eyebrow': 'Tu Agente Personal de Seguros',
+    'hero-h1': 'Hola, soy Victoria.<br>Te encuentro la <em>mejor cobertura</em>',
+    'hero-desc': 'Trabajo con todas las aseguradoras principales (excepto State Farm) para conseguirte las mejores tarifas. Una llamada a mí reemplaza docenas de llamadas a diferentes compañías.',
+    'btn-quote': 'Cotización Gratis',
+    'btn-explore': 'Ver Coberturas',
+    'svc-eyebrow': 'Lo Que Cubro',
+    'svc-title': 'Protección completa,<br>entregada personalmente',
+    'svc-subtitle': 'Busco en todas las aseguradoras principales (excepto State Farm) para encontrar tu mejor tarifa. Un agente, docenas de opciones.',
+    'svc-auto-h': 'Seguro de Auto',
+    'svc-auto-p': 'Cobertura de auto personal adaptada a tus hábitos de manejo, vehículo y presupuesto. Busco en múltiples compañías para encontrar tu mejor tarifa. ¿Mal historial? Aún puedo cubrirte — respuesta en 48 horas.',
+    'svc-home-h': 'Seguro de Casa',
+    'svc-home-p': 'Protege tu mayor inversión con cobertura completa para propietarios. Nos aseguramos de que tu hogar y todo lo que hay en él esté cubierto.',
+    'svc-rent-h': 'Seguro de Inquilinos',
+    'svc-rent-p': 'Protección accesible para tus pertenencias, responsabilidad civil y gastos de vivienda si ocurre lo inesperado. Tranquilidad para inquilinos.',
+    'svc-biz-h': 'Seguro de Negocio',
+    'svc-biz-p': 'Responsabilidad general, compensación laboral (disponible 9am–4pm), y cobertura comercial para proteger tu negocio mientras te enfocas en hacerlo crecer.',
+    'svc-com-h': 'Auto Comercial',
+    'svc-com-p': 'Cobertura las 24 horas para tus vehículos comerciales — desde camiones individuales hasta flotas completas. Disponible todo el día porque tu negocio no para a las 5pm.',
+    'svc-umb-h': 'Pólizas Paraguas',
+    'svc-umb-p': 'Protección de responsabilidad extra que se activa cuando tus otras pólizas alcanzan sus límites. La red de seguridad para tu red de seguridad.',
+    'svc-dmv-h': 'Trámites de DMV',
+    'svc-dmv-p': 'Manejamos tu papeleo y trámites del DMV para que no tengas que hacerlo. Ahorra tiempo y evita las filas.',
+    'svc-trans-h': 'Servicios de Traducción',
+    'svc-trans-p': 'Apoyo bilingüe en inglés y español. Nos aseguramos de que entiendas cada detalle de tu cobertura.',
+    'svc-cta-h': '¿No sabes qué necesitas?',
+    'svc-cta-p': 'Llámame directamente y te explico tus opciones. Sin compromiso, sin presión. Inglés y Español.',
+    'about-eyebrow': 'Sobre Mí',
+    'about-title': 'Tu seguro no debería ser<br>igual para todos.',
+    'about-p1': 'Soy Victoria Colato — tu agente personal de seguros en DESM2 Insurance. Tengo acceso a todas las aseguradoras principales excepto State Farm, lo que significa <strong style="color:var(--gold)">que puedo comparar docenas de compañías en una sola llamada para encontrarte la mejor tarifa.</strong>',
+    'about-p2': 'Cuando me llamas, me tienes a mí — no un centro de llamadas, no un robot, no una persona diferente cada vez. Manejo todo personalmente en inglés o español, desde tu primera cotización hasta presentar un reclamo. Tu cobertura, tus preguntas, tu agente.',
+    'faq-eyebrow': 'Bueno Saber',
+    'faq-title': 'Preguntas comunes,<br>respuestas directas',
+    'faq-1-h': '¿Qué pasa si tengo mal historial de manejo?',
+    'faq-1-p': 'Trabajo con aseguradoras que se especializan en conductores de alto riesgo. Puede tomar hasta 48 horas recibir respuesta en estos casos, pero te conseguiré cobertura — para eso estoy.',
+    'faq-2-h': '¿Pueden asegurar vehículos modificados o con turbo?',
+    'faq-2-p': 'La mayoría de las compañías de seguros no cubren autos pre-modificados con turbos, kits de carrocería o extensiones de rendimiento debido a la complejidad involucrada. Seré honesta contigo sobre lo que es posible y te ayudaré a explorar tus opciones.',
+    'faq-3-h': '¿Cuáles son los horarios para compensación laboral vs. auto?',
+    'faq-3-p': 'Las consultas de compensación laboral se manejan de lunes a viernes, 9am–4pm. El soporte de cobertura de auto comercial está disponible las 24 horas a través de la línea de reclamos del asegurador — me aseguraré de que tengas ese número desde el primer día.',
+    'faq-4-h': '¿Qué pasa si mi reclamo es denegado o cancelado?',
+    'faq-4-p': 'Yo no cancelo pólizas ni niego reclamos — esa decisión viene de la compañía de seguros. Lo que hago es abogar por ti. Si un reclamo es denegado, te ayudaré a entender por qué y explorar qué opciones tienes.',
+    'contact-eyebrow': 'Contáctame Directamente',
+    'contact-title': 'Llámame o escríbeme —<br>respondo personalmente',
+    'contact-desc': 'Ya sea que necesites una nueva póliza, quieras comparar tarifas, o solo tengas una pregunta — comunícate directamente. Sin centros de llamadas, sin transferencias. Solo yo.',
+    'form-submit': 'Enviar Mi Solicitud',
+    'lang-btn': 'EN | English',
+  }
+};
+
+let currentLang = 'en';
+const langBtn = document.getElementById('lang-toggle');
+const translatable = {};
+
+// Tag all translatable elements on first load
+document.addEventListener('DOMContentLoaded', () => {
+  // Map data-i18n attributes to elements
+  const mapping = [
+    ['.hero-eyebrow', 'hero-eyebrow', 'text'],
+    ['.hero h1', 'hero-h1', 'html'],
+    ['.hero-desc', 'hero-desc', 'text'],
+    ['.btn-primary', 'btn-quote', 'firstText'],
+    ['.btn-outline', 'btn-explore', 'text'],
+    ['.form-submit', 'form-submit', 'text'],
+  ];
+
+  // Add data-i18n to elements we can target
+  const allH3 = document.querySelectorAll('.service-card h3');
+  const allP = document.querySelectorAll('.service-card > p');
+  const svcKeys = ['auto','home','rent','biz','com','umb','dmv','trans'];
+
+  svcKeys.forEach((key, i) => {
+    if (allH3[i]) allH3[i].setAttribute('data-i18n', 'svc-'+key+'-h');
+    if (allP[i]) allP[i].setAttribute('data-i18n', 'svc-'+key+'-p');
+  });
+});
+
+langBtn.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  const t = translations[currentLang];
+
+  langBtn.textContent = t['lang-btn'];
+  langBtn.style.borderColor = currentLang === 'es' ? 'var(--gold)' : '';
+  langBtn.style.color = currentLang === 'es' ? 'var(--gold)' : '';
+
+  // Update tagged elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key];
+  });
+
+  // Update specific elements by selector
+  const q = (s) => document.querySelector(s);
+
+  const heroEyebrow = q('.hero-eyebrow');
+  if (heroEyebrow) heroEyebrow.innerHTML = (currentLang === 'en' ? '<span></span>' : '<span></span>') + t['hero-eyebrow'];
+
+  const heroH1 = q('.hero h1');
+  if (heroH1) heroH1.innerHTML = t['hero-h1'];
+
+  const heroDesc = q('.hero-desc');
+  if (heroDesc) heroDesc.textContent = t['hero-desc'];
+
+  const btnPrimary = q('.btn-primary');
+  if (btnPrimary) { btnPrimary.childNodes[0].textContent = t['btn-quote'] + ' '; }
+
+  const btnOutline = q('.btn-outline');
+  if (btnOutline) btnOutline.textContent = t['btn-explore'];
+
+  // Section headers
+  const sectionEyebrows = document.querySelectorAll('.section-eyebrow');
+  const sectionTitles = document.querySelectorAll('.section-title');
+  const sectionSubs = document.querySelectorAll('.section-subtitle');
+
+  const eyebrowKeys = ['svc-eyebrow', 'about-eyebrow', null, 'faq-eyebrow', 'contact-eyebrow'];
+  const titleKeys = ['svc-title', 'about-title', null, 'faq-title', 'contact-title'];
+
+  sectionEyebrows.forEach((el, i) => {
+    if (eyebrowKeys[i] && t[eyebrowKeys[i]]) el.textContent = t[eyebrowKeys[i]];
+  });
+  sectionTitles.forEach((el, i) => {
+    if (titleKeys[i] && t[titleKeys[i]]) el.innerHTML = t[titleKeys[i]];
+  });
+  if (sectionSubs[0] && t['svc-subtitle']) sectionSubs[0].textContent = t['svc-subtitle'];
+
+  // About paragraphs
+  const aboutTexts = document.querySelectorAll('.about-text');
+  if (aboutTexts[0]) aboutTexts[0].innerHTML = t['about-p1'];
+  if (aboutTexts[1]) aboutTexts[1].innerHTML = t['about-p2'];
+
+  // FAQ
+  const faqCards = document.querySelectorAll('#faq .service-card');
+  faqCards.forEach((card, i) => {
+    const h = card.querySelector('h3');
+    const p = card.querySelector('p');
+    if (h && t['faq-'+(i+1)+'-h']) h.textContent = t['faq-'+(i+1)+'-h'];
+    if (p && t['faq-'+(i+1)+'-p']) p.textContent = t['faq-'+(i+1)+'-p'];
+  });
+
+  // Wide CTA
+  const wideCta = q('.service-card.wide');
+  if (wideCta) {
+    const wh = wideCta.querySelector('h3');
+    const wp = wideCta.querySelector('p');
+    if (wh) wh.textContent = t['svc-cta-h'];
+    if (wp) wp.textContent = t['svc-cta-p'];
+  }
+
+  // Contact
+  const contactDesc = q('.contact-desc');
+  if (contactDesc) contactDesc.textContent = t['contact-desc'];
+
+  const formSubmit = q('.form-submit');
+  if (formSubmit) formSubmit.textContent = t['form-submit'];
+
+  // Smooth scroll to top briefly to signal language change
+  window.scrollTo({ top: window.scrollY - 1, behavior: 'smooth' });
 });
 </script>
 </body>
